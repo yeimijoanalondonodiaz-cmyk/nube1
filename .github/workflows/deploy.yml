@@ -1,29 +1,29 @@
 name: 🚀 Tarea de Despliegue
 
 on:
-  push:
-    branches:
-      - main
+   push:
+     branches:
+       - main
 
 jobs:
   deploy:
-    name: 🚀 Trabajo de Despliegue
+    name: 🎉 Trabajo de Despliegue
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Obtener código
+      - name: 🚚 Obteniendo el código más reciente
         uses: actions/checkout@v4
 
-      - name: 📂 Subir por FTP
+      - name: 📂 Sincronizando archivos via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp-yeimi.alwaysdata.net
+          server:  ftp-yeimi.alwaysdata.net # Change if using another host
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs
-          protocol: ftp
+          server-dir: www/ # Replace with your correct path
+          protocol: ftps
+          timeout: 86400000
           log-level: standard
           exclude: |
-            **/.git*
-            **/.github/**
-            .gitattributes
+           .git/**
+           .github/**
